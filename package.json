@@ -1,6 +1,6 @@
 {
   "name": "ternary-to-if-else",
-  "displayName": "Ternary to if-else",
+  "displayName": "Ternary to If-Else",
   "description": "Easily convert ternary expressions to if-else statements for better readability and debugging in JavaScript and TypeScript.",
   "version": "0.0.1",
   "icon": "/assets/icon.png",
@@ -120,5 +120,13 @@
     "typescript extensions",
     "coding productivity",
     "hover"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShreyPurohit/ternary-to-if-else-vscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ShreyPurohit/ternary-to-if-else-vscode/issues"
+  },
+  "homepage": "https://github.com/ShreyPurohit/ternary-to-if-else-vscode#readme"
 }
