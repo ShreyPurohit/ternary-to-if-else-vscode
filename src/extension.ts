@@ -97,6 +97,30 @@ function getIndent(level: number): string {
   return '    '.repeat(level);
 }
 
+function stripReturnKeyword(code: string): string {
+  const wrappedCode = `function dummy() { ${code} }`;
+
+  try {
+    const ast = parse(wrappedCode, { sourceType: 'module', plugins: ['jsx', 'typescript'] });
+    let expressionWithoutReturn = '';
+
+    traverse(ast, {
+      ReturnStatement(path) {
+        const argument = path.node.argument;
+        if (argument) {
+          expressionWithoutReturn = generateCode(argument);
+          path.stop();
+        }
+      },
+    });
+
+    return expressionWithoutReturn || code;
+  } catch (error) {
+    console.error('Error stripping return keyword:', error);
+    return code;
+  }
+}
+
 /**
  * Activates the extension and provides hover functionality.
  * @param context The extension context.
@@ -105,26 +129,42 @@ export function activate(context: vscode.ExtensionContext) {
   const hoverProvider = vscode.languages.registerHoverProvider(
     ['javascript', 'typescript', 'javascriptreact', 'typescriptreact'],
     {
-      provideHover(document, position, token) {
-        const line = document.lineAt(position).text;
-        const trimmedCode = line.trim();
-        if (token.isCancellationRequested) {
-          return null;
-        }
+      provideHover(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken) {
+        let fullExpression = '';
+        let currentLine = position.line;
 
-        // Validate if the code is a ternary expression
-        if (isTernary(trimmedCode)) {
-          const ifElse = convertToIfElse(trimmedCode);
+        while (currentLine < document.lineCount) {
+          const lineText = document.lineAt(currentLine).text.trim();
           if (token.isCancellationRequested) {
             return null;
           }
-          return new vscode.Hover({
-            language: 'typescript',
-            value: ifElse,
-          });
+
+          fullExpression += ` ${lineText}`;
+          if (lineText.endsWith(';') || lineText.endsWith('}') || currentLine === document.lineCount - 1) break;
+          currentLine++;
         }
 
-        return null;  
+        if (fullExpression.trim().startsWith('return')) {
+          fullExpression = stripReturnKeyword(fullExpression);
+        }
+
+        if (!fullExpression.trim().endsWith(';')) {
+          fullExpression += ';';
+        }
+
+        if (isTernary(fullExpression)) {
+          try {
+            const ifElse = convertToIfElse(fullExpression);
+            return new vscode.Hover({
+              language: 'typescript',
+              value: ifElse,
+            });
+          } catch (error) {
+            console.error('Error converting ternary:', error);
+          }
+        }
+
+        return null;
       }
     }
   );

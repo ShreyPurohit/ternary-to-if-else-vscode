@@ -2,8 +2,13 @@
 
 All notable changes to the "ternary-to-if-else" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## Added
+- v0.2 
+    - Added Support For Multi Line Ternary Conditions
+    - Added Support For JSX Detection
+    - Added Support For Function Detection
+    - Updated Readme Structure And Preview
 
 ## [Unreleased]
 
-- Initial release
+- Error Handling
