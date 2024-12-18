@@ -2,7 +2,7 @@
   "name": "ternary-to-if-else",
   "displayName": "Ternary to If-Else",
   "description": "Easily convert ternary expressions to if-else statements for better readability and debugging in JavaScript and TypeScript.",
-  "version": "0.2",
+  "version": "0.0.2",
   "icon": "/assets/icon.png",
   "publisher": "iamshreydxv",
   "engines": {
