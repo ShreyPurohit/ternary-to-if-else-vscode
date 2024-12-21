@@ -132,8 +132,6 @@ export function activate(context: vscode.ExtensionContext) {
       provideHover(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken) {
         let fullExpression = '';
         let currentLine = position.line;
-        console.log("=-------------currentLine-------",currentLine)
-
         while (currentLine < document.lineCount) {
           const lineText = document.lineAt(currentLine).text.trim();
           if (token.isCancellationRequested) {
