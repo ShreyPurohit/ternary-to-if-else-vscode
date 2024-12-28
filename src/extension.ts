@@ -132,13 +132,11 @@ export function activate(context: vscode.ExtensionContext) {
       provideHover(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken) {
         let fullExpression = '';
         let currentLine = position.line;
-
         while (currentLine < document.lineCount) {
           const lineText = document.lineAt(currentLine).text.trim();
           if (token.isCancellationRequested) {
             return null;
           }
-
           fullExpression += ` ${lineText}`;
           if (lineText.endsWith(';') || lineText.endsWith('}') || currentLine === document.lineCount - 1) break;
           currentLine++;
@@ -155,10 +153,14 @@ export function activate(context: vscode.ExtensionContext) {
         if (isTernary(fullExpression)) {
           try {
             const ifElse = convertToIfElse(fullExpression);
-            return new vscode.Hover({
-              language: 'typescript',
-              value: ifElse,
-            });
+            // Create Markdown content with a Copy button
+            const markdownContent = new vscode.MarkdownString();
+            markdownContent.isTrusted = true; // Allow the use of commands in the hover content
+
+            markdownContent.appendCodeblock(ifElse, 'typescript'); // Add the converted if-else code
+            markdownContent.appendMarkdown(`\n\n[Copy](command:extension.copyToClipboard?${encodeURIComponent(JSON.stringify(ifElse))})`); // Add a "Copy" button with a custom command
+            return new vscode.Hover(markdownContent);
+        
           } catch (error) {
             console.error('Error converting ternary:', error);
           }
@@ -168,7 +170,19 @@ export function activate(context: vscode.ExtensionContext) {
       }
     }
   );
-  context.subscriptions.push(hoverProvider);
+  context.subscriptions.push(hoverProvider, copyCommand);
 }
+
+
+  // Register the copy command
+  const copyCommand = vscode.commands.registerCommand('extension.copyToClipboard', async (text: string) => {
+    try {
+      await vscode.env.clipboard.writeText(text); // Copy text to the clipboard
+      vscode.window.showInformationMessage('Copied to clipboard!'); // Notify the user
+    } catch (error) {
+      vscode.window.showErrorMessage('Failed to copy to clipboard.');
+      console.error(error);
+    }
+  });
 
 export function deactivate() { }
