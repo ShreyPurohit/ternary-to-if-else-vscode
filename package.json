@@ -1,8 +1,8 @@
 {
-  "name": "ternary-to-if-else",
-  "displayName": "Ternary to If-Else",
-  "description": "Easily convert ternary expressions to if-else statements for better readability and debugging in JavaScript and TypeScript.",
-  "version": "0.0.2",
+  "name": "code-converter",
+  "displayName": "Code Converter",
+  "description": "Instantly visualize, transform and optimize JavaScript/TypeScript conditional expressions between ternary and if-else formats.",
+  "version": "0.0.1",
   "icon": "/assets/icon.png",
   "publisher": "iamshreydxv",
   "engines": {
@@ -19,64 +19,14 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "languages": [
+    "commands": [
       {
-        "id": "javascript",
-        "aliases": [
-          "JavaScript",
-          "js"
-        ],
-        "extensions": [
-          ".js"
-        ]
+        "command": "ternary-visualizer.copyIfElse",
+        "title": "Copy If-Else Code"
       },
       {
-        "id": "typescript",
-        "aliases": [
-          "TypeScript",
-          "ts"
-        ],
-        "extensions": [
-          ".ts"
-        ]
-      },
-      {
-        "id": "javascriptreact",
-        "aliases": [
-          "JavaScript React",
-          "jsx"
-        ],
-        "extensions": [
-          ".jsx"
-        ]
-      },
-      {
-        "id": "typescriptreact",
-        "aliases": [
-          "TypeScript React",
-          "tsx"
-        ],
-        "extensions": [
-          ".tsx"
-        ]
-      }
-    ],
-    "hoverProviders": [
-      {
-        "language": "javascript",
-        "selector": "*.js"
-      },
-      {
-        "language": "typescript",
-        "selector": "*.ts"
-      },
-      {
-        "language": "javascriptreact",
-        "selector": "*.jsx"
-      },
-      {
-        "language": "typescriptreact",
-        "selector": "*.tsx"
+        "command": "ternary-visualizer.copyTernary",
+        "title": "Copy Ternary Code"
       }
     ]
   },
@@ -113,13 +63,26 @@
   },
   "license": "MIT",
   "keywords": [
+    "code-converter",
     "ternary",
     "if-else",
-    "conditional expressions",
-    "vscode extension",
-    "typescript extensions",
-    "coding productivity",
-    "hover"
+    "conditional",
+    "javascript",
+    "typescript",
+    "react",
+    "code-transformation",
+    "refactoring",
+    "productivity",
+    "developer-tools",
+    "code-quality",
+    "code-formatter",
+    "vscode-extension",
+    "hover-preview",
+    "code-optimization",
+    "static-analysis",
+    "clean-code",
+    "readability",
+    "debugging"
   ],
   "repository": {
     "type": "git",
