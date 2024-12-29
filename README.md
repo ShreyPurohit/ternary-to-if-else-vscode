@@ -1,24 +1,52 @@
-# Ternary to If-Else
+# Code Converter
 
-- Easily convert ternary expressions into readable `if-else` statements.
-- Supports both simple and nested ternary conditions.
-- Makes code more intuitive and easier to debug.
-- View the `if-else` conversion instantly by hovering over the ternary.
-- Enhances readability for better collaboration and understanding.
+A powerful tool that enables bidirectional visualization and conversion between `ternary expressions` and `if-else` statements.
 
-## Preivew:
+## Table of Contents
 
-<img src="./assets/ternary.gif" alt="Hover Example" style="width: 80%; height: 600px;">
+- [Features](#features)
+- [If-Else to Ternary](#if-else-to-ternary)
+- [Ternary to If-Else](#ternary-to-if-else)
+- [Additional Features](#additional-features)
+- [How to Use](#how-to-use)
+- [Ternary to If-Else](#ternary-to-if-else-1)
+- [If-Else to Ternary](#if-else-to-ternary-1)
+- [Supported Languages](#supported-languages)
+- [Debugging](#debugging)
+- [Common Issues](#common-issues)
+    - [1. Unsupported File Types](#1-unsupported-file-types)
+    - [2. Invalid Syntax](#2-invalid-syntax)
+    - [3. Complex Nested Structures](#3-complex-nested-structures)
+- [More Examples To Try With](#more-examples-to-try-with)
+- [License](#license)
 
 ## Features:
 
-- **Hover to Convert**: Instantly see ternary expressions as `if-else`.
-- **Handles Nested Ternaries**: Breaks down complex conditions.
-- **Multi-Language Support**: Works with `.js`, `.ts`, `.jsx`, `.tsx`.
-- **Improves Readability**: Simplifies complex logic for better understanding.
+### If-Else to Ternary
+
+- **Description**: Transform nested `if-else` statements into concise ternary expressions.
+- **Key Benefits**:
+  - Faster execution compared to traditional if-else blocks.
+  - Reduces code length without losing functionality.
+  - Embraces modern JavaScript practices.
+  - Optimizes memory usage and final bundle size in production.
+
+### Ternary to If-Else
+
+- **Description**: Convert ternary expressions into more readable `if-else` statements.
+- **Key Benefits**:
+  - Simplifies debugging and understanding of complex logic.
+  - Serves as a learning aid for new team members.
+  - Useful for teaching fundamental programming concepts.
+
+### Additional Features:
+- **Copy & Paste**: Easy to copy the converted code and modify it for your needs
+- **Instant Preview**: See conversions in real-time without affecting original code
+- **Bidirectional Conversion**: Freedom to switch between both formats as needed
 
 ## How to Use:
 
+### Ternary to If-Else:
 1. **Hover Over Ternary Expressions**: Simply hover your mouse over any ternary condition (`condition ? value1 : value2`).
 2. **View Conversion**: The extension will automatically show the corresponding `if-else` statement as a hover preview.
    - Example:
@@ -35,31 +63,36 @@
          'no';
      }
      ```
+3. **Preview Exapmle**
+  - <img src="./assets/if-else_sample.png" alt="Hover Example Ternary->If-else" style="width: 100%; height: auto;">
 
-3. **Nested Ternaries**: Nested ternary conditions are automatically expanded into a readable structure.
+### If-Else to Ternary:
+1. **Select If-Else Block**: Highlight the if-else statement you want to convert.
+2. **Convert to Ternary**: The extension will transform it into an equivalent ternary expression.
    - Example:
 
      ```javascript
-     const value = conditionA ? (conditionB ? 'B1' : 'B2') : 'A2';
+     if (condition) {
+         return valueA;
+     } else {
+         if (nestedCondition) {
+             return valueB;
+         } else {
+             return valueC;
+         }
+     }
      ```
      Will be converted to:
 
      ```javascript
-     if (conditionA) {
-         if (conditionB) {
-             'B1';
-         } else {
-             'B2';
-         }
-     } else {
-         'A2';
-     }
+     condition ? valueA : (nestedCondition ? valueB : valueC)
      ```
+3. **Preview Exapmle**
+  - <img src="./assets/ternaryView_sample.png" alt="Hover Example Ternary->If-else" style="width: 100%; height: auto;">
 
 ## Supported Languages:
 
 This extension supports the following languages:
-
 - JavaScript (`.js`)
 - TypeScript (`.ts`)
 - JavaScript React (`.jsx`)
@@ -67,34 +100,133 @@ This extension supports the following languages:
 
 ## Debugging:
 
-If the extension doesn't seem to work as expected, here are a few common issues to check:
+### Common Issues:
 
-#### 1. Missing Semicolon
-
-- The extension relies on correctly formatted code, including proper semicolons.
-- If you encounter an error or the hover preview doesn't show, ensure that the ternary expression ends with a semicolon (`;`).
-- Example of a missing semicolon issue:
-  ```javascript
-  const value = conditionA ? 'A1' : 'A2'
-  ```
-
-#### 2. Unsupported File Types
-
-- Ensure the file type is one of the supported languages:
+#### 1. Unsupported File Types
+- Verify that you're using one of the supported file extensions:
     - JavaScript (.js)
     - TypeScript (.ts)
     - JavaScript React (.jsx)
     - TypeScript React (.tsx)
 
-#### 3. Invalid Syntax
+#### 2. Invalid Syntax
+- Code must be syntactically correct for the converter to work
+- Use your IDE's linting tools to check for syntax errors
 
-- If your code contains syntax errors, the extension won't be able to parse and convert the ternary expression.
-- Use your IDE's linting or formatting tools to ensure there are no issues.
+#### 3. Complex Nested Structures
+- While both converters support nested structures, extremely complex cases might need to be broken down
+- Consider splitting very complex conditions into smaller, more manageable parts
 
-#### 4. Nested or Complex Structures
+## More Examples To Try With:
 
-- While the extension supports nested ternary expressions, extremely complex structures may not be handled perfectly. Try simplifying the expression or breaking it into smaller parts.
+- [Nested Ternary to If-Else:](#nested-ternary-to-if-else)
+- [Ternary in Functions:](#ternary-in-functions)
+- [JSX Ternary Expression:](#jsx-ternary-expression)
+- [Objects:](#objects)
+- [Nested If-Else to Ternary:](#nested-if-else-to-ternary)
 
+### Nested Ternary to If-Else:
+```javascript
+const value = conditionA ? (conditionB ? 'B1' : 'B2') : 'A2';
+```
+Converts to:
+```javascript
+if (conditionA) {
+    if (conditionB) {
+        'B1';
+    } else {
+        'B2';
+    }
+} else {
+    'A2';
+}
+```
+
+### Ternary in Functions:
+```javascript
+function getStatus(conditionA: any) {
+    return conditionA
+        ? 100 + 50
+        : Math.random() > 0.5
+            ? 'Random True'
+            : 'Random False';
+}
+```
+Converts to:
+```javascript
+if (conditionA) {
+    100 + 50
+} else {
+    if (Math.random() > 0.5) {
+        'Random True'
+    } else {
+        'Random False'
+    }
+}
+```
+
+### JSX Ternary Expression:
+```javascript
+{posts?.length > 0 ? (
+posts.map((post) => (
+    <StartupCard key={post?._id} post={post as StartupTypeCard} />
+))
+) : (
+<p className="no-results">No Startups Found</p>
+)}
+```
+Converts to:
+```javascript
+if (posts?.length > 0) {
+    posts.map(post => <StartupCard key={post?._id} post={post as StartupTypeCard} />)
+} else {
+    <p className="no-results">No Startups Found</p>
+}
+```
+
+### Objects:
+```javascript
+const obj2 = {
+    key: conditionA ? (conditionB ? 'value1' : 'value2') : 'value3',
+}
+```
+Converts to:
+```javascript
+if (conditionA) {
+    if (conditionB) {
+        'value1'
+    } else {
+        'value2'
+    }
+} else {
+    'value3'
+}
+```
+
+### Nested If-Else to Ternary:
+```javascript
+if (hardCustomOccupancy && roomCustomOccupancy) {
+    roomCustomOccupancy?.adult;
+} else {
+    if (setSelectionDetails) {
+        if (condition) {
+            valueA;
+        } else {
+            valueB;
+        }
+    } else {
+        valueC;
+    }
+}
+```
+Converts to:
+```javascript
+hardCustomOccupancy && roomCustomOccupancy 
+    ? roomCustomOccupancy?.adult 
+    : setSelectionDetails 
+        ? condition ? valueA : valueB 
+        : valueC
+```
 
 ## License:
 
